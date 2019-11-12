@@ -151,7 +151,7 @@ function processContains(item, list, callback) {
   // create an array to hold all the items that meet the criteria
   const matchingItems = list.filter(word => word === item);
 
-  // if there are any items at all, return whatever the callback does in the ture condition
+  // if there are any items at all, return whatever the callback does in the true condition
   return callback(matchingItems.length > 0);
 }
 
@@ -175,12 +175,29 @@ function processContains(item, list, callback) {
  * should return 3.
 */
 function processDuplicateFree(list, callback) {
-  
 
+  // create an empty array to hold the entries that are unique
+  let listWithoutDuplicates = [];
 
+  // check each entry in the original list
+  list.forEach(function (listItem) {
 
-  
+    // if the entry isn't found in listWithoutDuplicates, it hasn't been seen before
+    if (!listWithoutDuplicates.includes(listItem))
+    {
+      // add that item to listWithoutDuplicates
+      listWithoutDuplicates.push(listItem);
+    }
+
+  });
+
+  // return the result of calling the callback on listWithoutDuplicates
+  return callback(listWithoutDuplicates);
+
+  //doesn't seem to work
+  // callback(list.filter(listItem => !(list.slice(0, list.indexOf(listItem))).includes(listItem)));  
 }
+
 
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
 /////////////// HIGHER-ORDER ARRAY METHODS ///////////////
